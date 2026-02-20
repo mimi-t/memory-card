@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+
+node_modules
+eslint.config.json
+package.json
+package-lock.json
+vite.config.js
