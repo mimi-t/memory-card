@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+import CardContainer from "./CardContainer";
+import Sidebar from "./Sidebar";
+
+const GHIBLI_API = "https://ghibliapi.vercel.app/films";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [score, setScore] = useState(0);
+  // const [highScore, setHighScore] = useState(0);
+  // const [selectedCards, setSelectedCards] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [allCards, setAllCards] = useState(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const params = new URLSearchParams();
+        params.append("fields", "id,title,image");
+        params.append("limit", 12);
+        const response = await fetch(`${GHIBLI_API}?${params}`);
+
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+        const result = await response.json();
+        setAllCards(result);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* <Sidebar score={score} highScore={highScore} /> */}
+      <CardContainer cards={allCards} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
