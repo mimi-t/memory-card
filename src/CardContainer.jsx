@@ -50,7 +50,6 @@ function CardContainer({ updateScores, resetScore }) {
   };
 
   const playRound = (cardId) => {
-    console.log(allCards.find((card) => card.id === cardId).title);
     if (selectedCards.includes(cardId)) {
       resetGame();
     } else {
