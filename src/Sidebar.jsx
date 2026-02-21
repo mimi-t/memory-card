@@ -4,8 +4,14 @@ function Sidebar({ score, highScore }) {
   return (
     <div id="sidebar">
       <h1>Ghibli Memory Card</h1>
-      <p>Score: {score}</p>
-      <p>High Score: {highScore}</p>
+      <div className="score-container">
+        <b>Score</b>
+        <p className="score-number">{score}</p>
+      </div>
+      <div className="score-container">
+        <b>High Score</b>
+        <p className="score-number">{highScore}</p>
+      </div>
     </div>
   );
 }

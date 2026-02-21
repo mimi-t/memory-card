@@ -1,3 +1,23 @@
+@font-face {
+  font-family: "Red Hat Display";
+  src:
+    url("./assets/fonts/RedHatDisplay-Light.woff2") format("woff2"),
+    url("./assets/fonts/RedHatDisplay-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Red Hat Display";
+  src:
+    url("./assets/fonts/RedHatDisplay-Regular.woff2") format("woff2"),
+    url("./assets/fonts/RedHatDisplay-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -31,6 +51,10 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family:
+    "Red Hat Display", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 button {

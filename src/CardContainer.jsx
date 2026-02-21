@@ -71,21 +71,28 @@ function CardContainer({ updateScores, resetScore }) {
   }
 
   return (
-    <div id="card-container">
+    <>
       {gameOver && (
-        <dialog open>
-          <p>Congrats! You selected all the cards!</p>
-          <button onClick={resetGame}>Replay</button>
-        </dialog>
+        <>
+          <div className="modal">
+            <dialog open>
+              <p>Congrats! You selected all the cards!</p>
+              <button onClick={resetGame}>Replay</button>
+            </dialog>
+          </div>
+          <div className="overlay"></div>
+        </>
       )}
-      {allCards.map((card) => (
-        <Card
-          key={card.id}
-          imgUrl={card.image}
-          onClick={() => playRound(card.id)}
-        />
-      ))}
-    </div>
+      <div id="card-container" className={gameOver ? "disabled" : ""}>
+        {allCards.map((card) => (
+          <Card
+            key={card.id}
+            imgUrl={card.image}
+            onClick={() => playRound(card.id)}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
